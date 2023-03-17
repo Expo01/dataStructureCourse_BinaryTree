@@ -40,6 +40,28 @@ public class BinarySearchTree {
                 temp = temp.right;
             }
         }
-    }
+    } // contains a while loop, but it does not iterate through linearly, so
+    // insert should bee O(log n)
+
+    public boolean contains(int value) {
+//        if (root == null) return false; // this line is unneccessary although some may like it for readability but
+        // it accounts for the tree being empty
+        Node temp = root; //
+        while (temp != null) { // since temp = root, we can also handle the empty tree scenario where the while loop
+            // never runs and returns false.
+            // for non-empty trees, the while loop will exit if the searched value does not exist
+            if (value < temp.value) {
+                temp = temp.left; //root pointer remains at first node and temp reassigned to next node to the left down
+                // the tree OR to null if the temp is already on the last node (temp is a leaf)
+            } else if (value > temp.value) {
+                temp = temp.right; // same thing but to the right
+            } else {
+                return true; // if the 'value' is not less or greater than 'temp' it must equal temp and will return true
+                //  UNLESS temp was reassigned to null in which case the loop would not have run and would have gone
+                // straight to returning false
+            }
+        }
+        return false;
+    } // also contains while loop but used to traverse tree so also O(log n)
 
 }
